@@ -1,0 +1,4 @@
+# Endereços alternativos que levam às páginas certas (Cloudflare Pages e Netlify)
+/homecare /home-care/ 301
+/home-care-idosos /home-care/ 301
+/avaliacao-fisioterapeutica /avaliacao/ 301

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
@@ -7,7 +7,8 @@
 <title>{{titulo}}</title>
 <meta name="description" content="{{descricao}}">
 <link rel="canonical" href="{{urlPagina}}">{{{robots}}}
-<meta name="theme-color" content="#502d0f">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light only">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fontes/bricolage-800.woff2" as="font" type="font/woff2" crossorigin>
@@ -30,10 +31,10 @@
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo">
   <div class="conteiner topo-interno">
-    <a class="marca" href="/">
+    <a class="marca" href="/" translate="no">
       <span class="marca-nome">{{nome}}</span>
       <span class="marca-registro">{{profissao}}, {{crefito}}</span>
     </a>
-    <a class="topo-wa" href="{{waLink}}">WhatsApp</a>
+    <a class="topo-wa" href="{{waLink}}" aria-label="Chamar no WhatsApp">WhatsApp</a>
   </div>
 </header>

@@ -19,6 +19,7 @@ TITULO_FONTE = dados_uri("fontes/bricolage-800.woff2", "font/woff2")
 TEXTO_FONTE = dados_uri("fontes/atkinson-400.woff2", "font/woff2")
 
 CARTOES = {
+    "inicio": "Fisioterapia para idosos na Zona Oeste de São Paulo",
     "avaliacao": "Avaliação fisioterapêutica completa, com relatório por escrito",
     "home-care": "Fisioterapia para idosos, na casa onde eles vivem",
 }

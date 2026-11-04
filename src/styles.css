@@ -19,6 +19,7 @@
 }
 
 :root {
+  color-scheme: light;
   --papel: #ffffff;
   --tinta: #2a1709;
   --tinta-suave: #6b4a2e;
@@ -40,7 +41,14 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(212, 81, 17, 0.18);
+  touch-action: manipulation;
+}
+
+main, section[id] { scroll-margin-top: 1rem; }
 
 body {
   margin: 0;
@@ -229,8 +237,10 @@ a:hover { text-decoration-thickness: 2px; }
   white-space: nowrap;
   transform: translateX(-50%);
 }
-.trena-marca:first-child { transform: none; left: 0.4rem !important; }
-.trena-marca:last-child { transform: translateX(-100%); left: calc(100% - 0.4rem) !important; }
+.trena-marca-0 { left: 0.4rem; transform: none; }
+.trena-marca-1 { left: 33.333%; }
+.trena-marca-2 { left: 66.667%; }
+.trena-marca-3 { left: calc(100% - 0.4rem); transform: translateX(-100%); }
 
 @keyframes desenrolar {
   from { transform: scaleX(0.04); }
@@ -343,7 +353,7 @@ main > .secao:last-child { padding-bottom: var(--respiro); }
 .preco:last-child { border-bottom: 1px solid rgba(252, 241, 214, 0.28); }
 .preco dt { font-family: var(--titulo); font-weight: 800; font-size: 1.25rem; color: var(--papel); line-height: 1.25; }
 .preco dd { margin: 0; }
-.preco-valor { font-family: var(--titulo); font-weight: 800; font-size: clamp(1.6rem, 4.5vw, 2.1rem); color: var(--mostarda); white-space: nowrap; }
+.preco-valor { font-family: var(--titulo); font-weight: 800; font-size: clamp(1.6rem, 4.5vw, 2.1rem); color: var(--mostarda); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .preco-detalhe { grid-column: 1 / -1; color: #f2d9a6; font-size: 1.0625rem; }
 .valores-acao { margin-top: 2.25rem; }
 .valores .botao { background: var(--mostarda); color: var(--tinta); box-shadow: 0 4px 0 #2a1709; }
@@ -465,6 +475,10 @@ main > .secao:last-child { padding-bottom: var(--respiro); }
 @media (min-width: 62rem) {
   .heroi-grade { grid-template-columns: 1.25fr 1fr; }
   .passos { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 45.99rem) {
+  html { scroll-padding-bottom: 5.5rem; }
 }
 
 @media (max-width: 22rem) {

@@ -1,5 +1,7 @@
-// Gera o site estático em public/ a partir de src/.
-// Uso: node build.mjs   (não precisa instalar nada)
+// Gera o site estático em public/ a partir de src/ e confere o resultado.
+// Uso: node build.mjs   (Node 18 ou mais novo; não precisa instalar nada)
+// Se alguma conferência falhar, o comando termina com erro e a hospedagem
+// não publica a versão quebrada.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,19 +12,35 @@ const pub = path.join(raiz, "public");
 
 const dados = JSON.parse(fs.readFileSync(path.join(src, "dados.json"), "utf8"));
 const avisos = [];
+const erros = [];
 
-const reais = (v) =>
-  v == null
-    ? null
-    : "R$ " + Number(v).toLocaleString("pt-BR", { minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 });
+const formatoReais = (v) =>
+  new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: Number.isInteger(v) ? 0 : 2,
+    maximumFractionDigits: 2,
+  }).format(v);
+const reais = (v) => (v == null ? null : formatoReais(Number(v)));
 
 const precoAvaliacao = reais(dados.valores.avaliacaoCompleta);
-if (!precoAvaliacao) avisos.push("Valor da avaliação completa não definido em src/dados.json: a página mostra \"sob consulta\".");
+if (!precoAvaliacao) avisos.push('Valor da avaliação completa não definido em src/dados.json: as páginas mostram "sob consulta".');
+const precoSessao = reais(dados.valores.sessao);
+if (!precoSessao) erros.push("Valor da sessão não definido em src/dados.json.");
 
 const dataAtualizacao = new Date(dados.atualizadoEm + "T12:00:00-03:00");
-const dataExtenso = dataAtualizacao.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric", timeZone: "America/Sao_Paulo" });
+if (Number.isNaN(dataAtualizacao.getTime())) erros.push(`Data inválida em atualizadoEm: ${dados.atualizadoEm}`);
+const dataExtenso = new Intl.DateTimeFormat("pt-BR", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "America/Sao_Paulo",
+}).format(dataAtualizacao);
 
-const linkWa = (chave) => `https://wa.me/${dados.whatsapp}?text=${encodeURIComponent(dados.mensagens[chave])}`;
+const linkWa = (chave) => {
+  if (!dados.mensagens[chave]) throw new Error(`Mensagem de WhatsApp inexistente: ${chave}`);
+  return `https://wa.me/${dados.whatsapp}?text=${encodeURIComponent(dados.mensagens[chave])}`;
+};
 
 const temFoto = fs.existsSync(path.join(src, "img", "danilo.webp"));
 const retrato = temFoto
@@ -45,7 +63,7 @@ for (const arq of fs.readdirSync(path.join(src, "partes"))) {
   partes[path.basename(arq, ".html")] = fs.readFileSync(path.join(src, "partes", arq), "utf8");
 }
 
-function jsonLd(pagina) {
+function jsonLd() {
   const ofertas = [
     { nome: "Avaliação fisioterapêutica completa com relatório", valor: dados.valores.avaliacaoCompleta },
     { nome: "Sessão de fisioterapia em casa", valor: dados.valores.sessao },
@@ -72,20 +90,20 @@ function jsonLd(pagina) {
   return JSON.stringify(obj).replace(/</g, "\\u003c");
 }
 
-function render(modelo, vars) {
+function render(modelo, vars, arq) {
   let saida = modelo;
   for (let i = 0; i < 5 && /\{\{>\s*[\w-]+\s*\}\}/.test(saida); i++) {
     saida = saida.replace(/\{\{>\s*([\w-]+)\s*\}\}/g, (_, nome) => {
-      if (!(nome in partes)) throw new Error(`Parte inexistente: ${nome}`);
+      if (!(nome in partes)) throw new Error(`${arq}: parte inexistente "${nome}"`);
       return partes[nome];
     });
   }
-  saida = saida.replace(/\{\{\{\s*([\w]+)\s*\}\}\}/g, (_, chave) => {
-    if (!(chave in vars)) throw new Error(`Variável inexistente: ${chave}`);
+  saida = saida.replace(/\{\{\{\s*(\w+)\s*\}\}\}/g, (_, chave) => {
+    if (!(chave in vars)) throw new Error(`${arq}: variável inexistente "${chave}"`);
     return String(vars[chave]);
   });
-  saida = saida.replace(/\{\{\s*([\w]+)\s*\}\}/g, (_, chave) => {
-    if (!(chave in vars)) throw new Error(`Variável inexistente: ${chave}`);
+  saida = saida.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, chave) => {
+    if (!(chave in vars)) throw new Error(`${arq}: variável inexistente "${chave}"`);
     return escapar(vars[chave]);
   });
   return saida.replace(/\n\s*\n+/g, "\n");
@@ -94,8 +112,8 @@ function render(modelo, vars) {
 fs.rmSync(pub, { recursive: true, force: true });
 fs.mkdirSync(pub, { recursive: true });
 
-const urls = [];
-for (const arq of fs.readdirSync(path.join(src, "paginas"))) {
+const geradas = [];
+for (const arq of fs.readdirSync(path.join(src, "paginas")).filter((a) => a.endsWith(".html"))) {
   const bruto = fs.readFileSync(path.join(src, "paginas", arq), "utf8");
   const m = bruto.match(/^<!--meta\s*([\s\S]*?)-->\s*/);
   if (!m) throw new Error(`Página sem bloco meta: ${arq}`);
@@ -106,23 +124,22 @@ for (const arq of fs.readdirSync(path.join(src, "paginas"))) {
     ...dados,
     ...meta,
     css,
-    jsonld: jsonLd(meta),
+    jsonld: jsonLd(),
     urlPagina: dados.dominio + meta.caminho,
     waLink: linkWa(meta.mensagem),
     precoAvaliacao: precoAvaliacao ?? "sob consulta",
-    precoSessao: reais(dados.valores.sessao),
+    precoSessao,
     localAvaliacaoFrase: `A avaliação é feita ${dados.localAvaliacao}, como for melhor para o paciente.`,
     dataExtenso,
     retrato,
     robots: meta.semIndice ? '\n<meta name="robots" content="noindex">' : "",
   };
 
-  const html = render(corpo, vars);
+  const html = render(corpo, vars, arq);
   const destino = path.join(pub, meta.saida);
   fs.mkdirSync(path.dirname(destino), { recursive: true });
   fs.writeFileSync(destino, html);
-  if (!meta.semIndice) urls.push(dados.dominio + meta.caminho);
-  console.log("ok", meta.saida, (Buffer.byteLength(html) / 1024).toFixed(1) + " KB");
+  geradas.push({ arq, meta, html, destino });
 }
 
 for (const pasta of ["fontes", "img", "og"]) {
@@ -132,7 +149,11 @@ for (const pasta of ["fontes", "img", "og"]) {
 for (const arq of ["favicon.svg", "apple-touch-icon.png"]) {
   if (fs.existsSync(path.join(src, arq))) fs.copyFileSync(path.join(src, arq), path.join(pub, arq));
 }
+for (const arq of ["_headers", "_redirects"]) {
+  fs.copyFileSync(path.join(src, "plataforma", arq), path.join(pub, arq));
+}
 
+const urls = geradas.filter((g) => !g.meta.semIndice).map((g) => dados.dominio + g.meta.caminho);
 fs.writeFileSync(
   path.join(pub, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
@@ -141,4 +162,72 @@ fs.writeFileSync(
 );
 fs.writeFileSync(path.join(pub, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${dados.dominio}/sitemap.xml\n`);
 
+// ---------- Conferências ----------
+const existeNoSite = (caminho) => {
+  const limpo = decodeURIComponent(caminho.split("#")[0].split("?")[0]);
+  const alvo = path.join(pub, limpo);
+  if (limpo.endsWith("/")) return fs.existsSync(path.join(alvo, "index.html"));
+  return fs.existsSync(alvo) && fs.statSync(alvo).isFile();
+};
+const textoVisivel = (html) =>
+  html
+    .replace(/<(script|style)[\s\S]*?<\/\1>/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;| /g, " ")
+    .replace(/\s+/g, " ");
+
+for (const { arq, meta, html } of geradas) {
+  const onde = `${arq}:`;
+  const semCodigo = html.replace(/<(script|style)[\s\S]*?<\/\1>/g, "");
+  if (/\{\{|\}\}/.test(semCodigo)) erros.push(`${onde} sobrou marcação {{ }} sem preencher.`);
+
+  const h1 = (html.match(/<h1[\s>]/g) || []).length;
+  if (h1 !== 1) erros.push(`${onde} tem ${h1} títulos h1 (deve ter 1).`);
+
+  const titulo = (html.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || "";
+  if (!titulo) erros.push(`${onde} sem <title>.`);
+  else if (titulo.length > 70) avisos.push(`${onde} título com ${titulo.length} caracteres; o Google costuma cortar depois de uns 60.`);
+
+  const desc = (html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || "";
+  if (desc.length < 50 || desc.length > 170) avisos.push(`${onde} descrição com ${desc.length} caracteres (ideal entre 50 e 160).`);
+
+  for (const bloco of html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g) || []) {
+    try {
+      JSON.parse(bloco.replace(/^<script[^>]*>|<\/script>$/g, ""));
+    } catch (e) {
+      erros.push(`${onde} JSON-LD inválido: ${e.message}`);
+    }
+  }
+
+  const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((x) => x[1]));
+  for (const [, ref] of html.matchAll(/\s(?:href|src)="([^"]+)"/g)) {
+    if (ref.startsWith("#")) {
+      if (!ids.has(ref.slice(1))) erros.push(`${onde} âncora ${ref} não existe na página.`);
+    } else if (ref.startsWith("/") && !ref.startsWith("//")) {
+      if (!existeNoSite(ref)) erros.push(`${onde} link interno quebrado: ${ref}`);
+    } else if (!/^(https:\/\/|mailto:)/.test(ref)) {
+      erros.push(`${onde} link em formato inesperado: ${ref}`);
+    }
+  }
+  if (!existeNoSite(meta.ogImagem)) erros.push(`${onde} imagem de compartilhamento não encontrada: ${meta.ogImagem}`);
+
+  // Resolução COFFITO nº 532/2021, art. 4º: nome, inscrição e data em toda publicação.
+  const visivel = textoVisivel(html);
+  const crefito = dados.crefito.replace(/ /g, " ");
+  if (!visivel.includes(dados.nome)) erros.push(`${onde} o nome não aparece na página.`);
+  if (!visivel.includes(crefito)) erros.push(`${onde} o registro ${crefito} não aparece na página.`);
+  if (!visivel.includes(`atualizada em ${dataExtenso}`)) erros.push(`${onde} a data de atualização não aparece no rodapé.`);
+  if (/\bespecialista\b|\bespecializad[ao]\b/i.test(visivel))
+    erros.push(`${onde} usa "especialista"/"especializado" (só com título reconhecido pelo COFFITO).`);
+  if (/—/.test(visivel)) avisos.push(`${onde} tem travessão (—) no texto.`);
+
+  console.log("ok", meta.saida, (Buffer.byteLength(html) / 1024).toFixed(1) + " KB");
+}
+
 for (const a of avisos) console.warn("AVISO:", a);
+if (erros.length) {
+  for (const e of erros) console.error("ERRO:", e);
+  console.error(`\n${erros.length} problema(s). Corrija antes de publicar.`);
+  process.exit(1);
+}
+console.log("Tudo conferido.");
