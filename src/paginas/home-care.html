@@ -1,0 +1,226 @@
+<!--meta {
+  "caminho": "/home-care/",
+  "saida": "home-care/index.html",
+  "titulo": "Fisioterapia para idosos em casa, Zona Oeste de SP | Danilo Lopes, Fisioterapeuta",
+  "tituloOg": "Fisioterapia para idosos, na casa onde eles vivem",
+  "descricao": "Sessões de fisioterapia na casa do idoso: força, marcha, equilíbrio, prevenção de quedas e recursos para dor, como acupuntura e laserterapia. Zona Oeste de São Paulo.",
+  "ogImagem": "/og/home-care.png",
+  "mensagem": "homecare",
+  "waTexto": "Chamar no WhatsApp",
+  "trenaLegenda": "<strong>Cada plano parte de números.</strong> Força, marcha e equilíbrio são medidos na avaliação e medidos de novo nas reavaliações, com os mesmos testes, como os três metros do TUG."
+} -->
+{{> cabeca}}
+<main id="conteudo">
+
+  <section class="heroi">
+    <div class="conteiner heroi-grade">
+      <div class="heroi-texto">
+        <h1>Fisioterapia para idosos, na casa onde eles vivem</h1>
+        <p class="lead">O treino acontece onde a dificuldade aparece: na poltrona da sala, no corredor, no banheiro, na escada. Com objetivos definidos numa avaliação e registro do que foi feito, para a família acompanhar.</p>
+        <p class="preco-linha">Sessão em casa: <strong>{{precoSessao}}</strong></p>
+        <div class="heroi-acao"><a class="botao" href="{{waLink}}">{{waTexto}}</a></div>
+        <p class="heroi-nota">Atendimento particular na {{regiao}}.</p>
+      </div>
+
+      <figure class="planta">
+        <svg viewBox="0 0 400 320" role="img" aria-labelledby="planta-titulo">
+          <title id="planta-titulo">Planta de uma casa com os pontos de treino: poltrona da sala, corredor, banheiro, escada e cama</title>
+          <rect x="10" y="10" width="380" height="300" fill="#ffffff" stroke="#502d0f" stroke-width="6"/>
+          <rect x="302" y="232" width="85" height="75" fill="#fcf1d6"/>
+          <g stroke="#502d0f" stroke-width="4" stroke-linecap="square">
+            <line x1="220" y1="10" x2="220" y2="118"/>
+            <line x1="220" y1="172" x2="220" y2="310"/>
+            <line x1="220" y1="150" x2="248" y2="150"/>
+            <line x1="292" y1="150" x2="390" y2="150"/>
+            <line x1="300" y1="150" x2="300" y2="168"/>
+            <line x1="300" y1="208" x2="300" y2="230"/>
+            <line x1="300" y1="230" x2="390" y2="230"/>
+          </g>
+          <g stroke="#502d0f" stroke-width="2">
+            <line x1="314" y1="236" x2="314" y2="284"/>
+            <line x1="327" y1="236" x2="327" y2="284"/>
+            <line x1="340" y1="236" x2="340" y2="284"/>
+            <line x1="353" y1="236" x2="353" y2="284"/>
+            <line x1="366" y1="236" x2="366" y2="284"/>
+            <line x1="379" y1="236" x2="379" y2="284"/>
+          </g>
+          <rect x="38" y="212" width="66" height="62" rx="10" fill="#fcf1d6" stroke="#502d0f" stroke-width="2"/>
+          <rect x="38" y="212" width="66" height="16" rx="6" fill="#e6a30b" stroke="#502d0f" stroke-width="2"/>
+          <rect x="300" y="28" width="76" height="98" rx="6" fill="#fcf1d6" stroke="#502d0f" stroke-width="2"/>
+          <rect x="310" y="36" width="56" height="18" rx="4" fill="#ffffff" stroke="#502d0f" stroke-width="2"/>
+          <ellipse cx="368" cy="192" rx="11" ry="14" fill="#ffffff" stroke="#502d0f" stroke-width="2"/>
+          <path d="M71 250 C140 250 175 146 220 146 L254 150 C262 170 264 188 300 188 L352 190" fill="none" stroke="#d45111" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+          <path d="M262 196 L262 268 L336 268" fill="none" stroke="#d45111" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+          <path d="M270 150 L270 118 C270 100 300 92 322 92" fill="none" stroke="#d45111" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+          <g fill="#e6a30b" stroke="#502d0f" stroke-width="3">
+            <circle cx="71" cy="250" r="10"/>
+            <circle cx="262" cy="232" r="10"/>
+            <circle cx="336" cy="190" r="10"/>
+            <circle cx="336" cy="268" r="10"/>
+            <circle cx="322" cy="92" r="10"/>
+          </g>
+          <g class="planta-texto">
+            <text x="30" y="46">Sala</text>
+            <text x="232" y="42">Quarto</text>
+            <text x="230" y="300">Corredor</text>
+            <text x="306" y="222">Banheiro</text>
+            <text x="312" y="302">Escada</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  {{> trena}}
+
+  <section class="secao" aria-labelledby="titulo-publico">
+    <div class="conteiner">
+      <div class="secao-cabeca">
+        <h2 id="titulo-publico">Para quem é</h2>
+        <p class="secao-intro">Idosos que se beneficiam de tratamento sem sair de casa, ou que precisam treinar justamente no ambiente onde vivem.</p>
+      </div>
+      <ul class="lista-regua">
+        <li>Dificuldade para sair de casa</li>
+        <li>Recuperação depois de internação ou de cirurgia, como de quadril e joelho</li>
+        <li>Sequelas de AVC</li>
+        <li>Doença de Parkinson</li>
+        <li>Dor persistente na coluna, no quadril ou no joelho</li>
+        <li>Quedas recentes, medo de cair ou perda de força</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="secao" aria-labelledby="titulo-sessoes">
+    <div class="conteiner">
+      <div class="secao-cabeca">
+        <h2 id="titulo-sessoes">O que é trabalhado nas sessões</h2>
+        <p class="secao-intro">O plano muda de pessoa para pessoa. Estes são os eixos mais comuns.</p>
+      </div>
+      <dl class="definicoes">
+        <div class="definicao">
+          <dt>Força</dt>
+          <dd>Exercícios progressivos para pernas, tronco e braços, ajustados ao que o paciente consegue fazer naquele dia.</dd>
+        </div>
+        <div class="definicao">
+          <dt>Marcha e equilíbrio</dt>
+          <dd>Caminhar com mais segurança dentro de casa e, quando possível, na rua.</dd>
+        </div>
+        <div class="definicao">
+          <dt>Transferências</dt>
+          <dd>Levantar da cama, da cadeira e do vaso sanitário com menos esforço, com orientação para quem ajuda.</dd>
+        </div>
+        <div class="definicao">
+          <dt>Prevenção de quedas</dt>
+          <dd>Treino de equilíbrio e sugestões de ajustes simples no ambiente da casa.</dd>
+        </div>
+        <div class="definicao">
+          <dt>Recursos para dor</dt>
+          <dd>Acupuntura, eletroacupuntura e laserterapia, associadas aos exercícios quando há indicação.</dd>
+        </div>
+        <div class="definicao">
+          <dt>Orientação à família</dt>
+          <dd>O que fazer entre uma sessão e outra, e como ajudar sem sobrecarregar ninguém.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="secao" aria-labelledby="titulo-motivos">
+    <div class="conteiner">
+      <div class="secao-cabeca">
+        <h2 id="titulo-motivos">Por que em casa</h2>
+      </div>
+      <ul class="motivos">
+        <li>O treino usa os móveis, os degraus e os caminhos que o paciente percorre todo dia.</li>
+        <li>Não há o cansaço do deslocamento até uma clínica.</li>
+        <li>A família e o cuidador veem os exercícios e aprendem a ajudar.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="secao" aria-labelledby="titulo-passos">
+    <div class="conteiner">
+      <div class="secao-cabeca">
+        <h2 id="titulo-passos">Como funciona</h2>
+      </div>
+      <ol class="passos">
+        <li>
+          <h3>Avaliação inicial</h3>
+          <p>Testes padronizados de força, marcha e equilíbrio, com relatório por escrito. <a href="/avaliacao/">Ver como é a avaliação</a>.</p>
+        </li>
+        <li>
+          <h3>Plano combinado</h3>
+          <p>Objetivos e frequência das sessões definidos com a família, a partir dos resultados.</p>
+        </li>
+        <li>
+          <h3>Sessões em casa</h3>
+          <p>De {{duracaoSessao}}, com registro do que foi feito para a família acompanhar.</p>
+        </li>
+        <li>
+          <h3>Reavaliação</h3>
+          <p>Os mesmos testes são refeitos de tempos em tempos, para acompanhar a evolução com números.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="secao valores" aria-labelledby="titulo-valores">
+    <div class="conteiner">
+      <div class="secao-cabeca">
+        <h2 id="titulo-valores">Valores</h2>
+        <p class="secao-intro">Atendimento particular na {{regiao}}.</p>
+      </div>
+      <dl class="precos">
+        <div class="preco">
+          <dt>Sessão de fisioterapia em casa</dt>
+          <dd class="preco-valor">{{precoSessao}}</dd>
+          <dd class="preco-detalhe">{{duracaoSessao}}. A frequência é definida depois da avaliação.</dd>
+        </div>
+        <div class="preco">
+          <dt>Avaliação completa com relatório</dt>
+          <dd class="preco-valor">{{precoAvaliacao}}</dd>
+          <dd class="preco-detalhe">O ponto de partida do tratamento. <a href="/avaliacao/">Ver o que é medido</a>.</dd>
+        </div>
+      </dl>
+      <div class="valores-acao"><a class="botao" href="{{waLink}}">{{waTexto}}</a></div>
+    </div>
+  </section>
+
+  {{> sobre}}
+
+  <section class="secao" aria-labelledby="titulo-perguntas">
+    <div class="conteiner">
+      <div class="secao-cabeca">
+        <h2 id="titulo-perguntas">Perguntas frequentes</h2>
+      </div>
+      <div class="perguntas">
+        <details class="pergunta">
+          <summary>Quantas sessões por semana?</summary>
+          <p>Depende dos objetivos e do que a avaliação mostrar. A frequência é combinada com a família.</p>
+        </details>
+        <details class="pergunta">
+          <summary>Precisa de pedido médico?</summary>
+          <p>Não é necessário para o atendimento particular. Exames e relatórios médicos recentes ajudam e podem ser mostrados na primeira visita.</p>
+        </details>
+        <details class="pergunta">
+          <summary>O cuidador pode participar?</summary>
+          <p>Sim. Parte do trabalho é mostrar como ajudar no dia a dia com segurança.</p>
+        </details>
+        <details class="pergunta">
+          <summary>Em quais bairros você atende?</summary>
+          <p>Na {{regiao}}. Para outros bairros, chame no WhatsApp para conferir.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao fechamento" aria-labelledby="titulo-fechamento">
+    <div class="conteiner fechamento-interno">
+      <h2 id="titulo-fechamento">Vamos conversar sobre o caso?</h2>
+      <p>Conte um pouco sobre a situação pelo WhatsApp e combinamos a avaliação.</p>
+      <a class="botao" href="{{waLink}}">{{waTexto}}</a>
+    </div>
+  </section>
+
+</main>
+{{> rodape}}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js")</script>
+<title>{{titulo}}</title>
+<meta name="description" content="{{descricao}}">
+<link rel="canonical" href="{{urlPagina}}">{{{robots}}}
+<meta name="theme-color" content="#502d0f">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fontes/bricolage-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fontes/atkinson-400.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="{{nome}}, {{profissao}}">
+<meta property="og:title" content="{{tituloOg}}">
+<meta property="og:description" content="{{descricao}}">
+<meta property="og:url" content="{{urlPagina}}">
+<meta property="og:image" content="{{dominio}}{{ogImagem}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{tituloOg}}">
+<meta name="twitter:card" content="summary_large_image">
+<style>{{{css}}}</style>
+<script type="application/ld+json">{{{jsonld}}}</script>
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+  <div class="conteiner topo-interno">
+    <a class="marca" href="/">
+      <span class="marca-nome">{{nome}}</span>
+      <span class="marca-registro">{{profissao}}, {{crefito}}</span>
+    </a>
+    <a class="topo-wa" href="{{waLink}}">WhatsApp</a>
+  </div>
+</header>

@@ -1,0 +1,50 @@
+<!--meta {
+  "caminho": "/",
+  "saida": "index.html",
+  "titulo": "Danilo Lopes, Fisioterapeuta | Fisioterapia para idosos na Zona Oeste de SP",
+  "tituloOg": "Danilo Lopes, Fisioterapeuta",
+  "descricao": "Fisioterapia para idosos em casa e avaliação funcional completa com relatório por escrito. Zona Oeste de São Paulo.",
+  "ogImagem": "/og/home-care.png",
+  "mensagem": "geral",
+  "waTexto": "Chamar no WhatsApp",
+  "trenaLegenda": "<strong>Medir para cuidar.</strong> Força, marcha e equilíbrio avaliados com testes padronizados, como os três metros do TUG."
+} -->
+{{> cabeca}}
+<main id="conteudo">
+
+  <section class="heroi">
+    <div class="conteiner">
+      <div class="heroi-texto">
+        <h1>Fisioterapia para idosos, com avaliação e acompanhamento por números</h1>
+        <p class="lead">Atendimento particular na {{regiao}}. Escolha por onde começar.</p>
+      </div>
+    </div>
+  </section>
+
+  {{> trena}}
+
+  <section class="secao" aria-label="Serviços">
+    <div class="conteiner">
+      <ul class="inicio-caminhos">
+        <li>
+          <a class="caminho" href="/avaliacao/">
+            <h2>Avaliação completa com relatório</h2>
+            <p>Testes de força, marcha, equilíbrio e risco de queda, organizados num relatório por escrito para a família.</p>
+            <span class="caminho-preco">{{precoAvaliacao}}</span>
+          </a>
+        </li>
+        <li>
+          <a class="caminho" href="/home-care/">
+            <h2>Fisioterapia em casa</h2>
+            <p>Sessões na casa do paciente, com treino no ambiente onde ele vive e orientação para quem cuida.</p>
+            <span class="caminho-preco">{{precoSessao}} por sessão</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  {{> sobre}}
+
+</main>
+{{> rodape}}

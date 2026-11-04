@@ -1,0 +1,39 @@
+<footer class="rodape">
+  <div class="conteiner">
+    <div class="rodape-grade">
+      <div>
+        <p class="rodape-nome">{{nome}}</p>
+        <p>{{profissao}}, {{crefito}}</p>
+        <p>Atendimento particular na {{regiao}}</p>
+      </div>
+      <div>
+        <p><a href="{{waLink}}">WhatsApp {{whatsappExibicao}}</a></p>
+        <p><a href="mailto:{{email}}">{{email}}</a></p>
+        <p><a href="https://www.instagram.com/{{instagram}}/">Instagram @{{instagram}}</a></p>
+      </div>
+      <nav aria-label="Páginas do site">
+        <p><a href="/avaliacao/">Avaliação completa com relatório</a></p>
+        <p><a href="/home-care/">Fisioterapia em casa</a></p>
+        <p><a href="/">Início</a></p>
+      </nav>
+    </div>
+    <div class="rodape-legal">
+      <p>Página atualizada em {{dataExtenso}}.</p>
+      <p>Este site não usa cookies nem coleta dados de quem visita.</p>
+    </div>
+  </div>
+</footer>
+<div class="barra-wa"><a class="botao" href="{{waLink}}">{{waTexto}}</a></div>
+<script>
+(function () {
+  var barra = document.querySelector(".barra-wa");
+  var alvo = document.querySelector(".heroi .botao") || document.querySelector(".heroi");
+  if (!barra) return;
+  if (!alvo || !("IntersectionObserver" in window)) { barra.classList.add("visivel"); return; }
+  new IntersectionObserver(function (e) {
+    barra.classList.toggle("visivel", !e[0].isIntersecting && e[0].boundingClientRect.top < 0);
+  }).observe(alvo);
+})();
+</script>
+</body>
+</html>
