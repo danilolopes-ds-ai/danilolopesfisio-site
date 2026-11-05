@@ -39,12 +39,14 @@ No GitHub, a cada envio, o mesmo build roda e confere se a pasta `public/` envia
 ## Estrutura
 
 - `src/paginas/` uma página por arquivo; o bloco `<!--meta ... -->` no topo define título, descrição e mensagem do WhatsApp
-- `src/partes/` cabeçalho, trena, "Quem atende" e rodapé, compartilhados
-- `src/styles.css` todo o visual
+- `DESIGN.md` o sistema visual: cores, fontes, espaçamentos, vidro e componentes, cada um com sua função
+- `src/partes/` cabeçalho, relatório de exemplo, "Quem atende", fechamento e rodapé, compartilhados
+- `src/styles.css` todo o visual, usando os tokens do DESIGN.md
 - `src/plataforma/` `_headers` (segurança e cache) e `_redirects` (endereços alternativos), copiados para `public/`
-- `src/img/danilo.webp` se existir, entra no lugar das iniciais em "Quem atende" (quadrada, 576 px)
-- `ferramentas/gerar-imagens.py` gera as imagens de compartilhamento em `src/og/`
+- `src/img/danilo.webp` se existir, entra em "Quem atende" (retrato 4:5, 640 x 800 px)
+- `ferramentas/gerar-imagens.py` gera as imagens de compartilhamento em `src/og/` e o ícone do celular
+- `ferramentas/gerar-bambuzal.py` gera o fundo de bambu desfocado
 
 ## Fontes
 
-Bricolage Grotesque e Atkinson Hyperlegible, licença SIL Open Font License (arquivos em `src/fontes/`).
+Newsreader (títulos, com tamanho óptico fixo em 36) e Hanken Grotesk (texto), licença SIL Open Font License (arquivos em `src/fontes/`).

@@ -2,53 +2,43 @@
   "caminho": "/avaliacao/",
   "saida": "avaliacao/index.html",
   "titulo": "Avaliação fisioterapêutica para idosos com relatório | Danilo Lopes",
-  "tituloOg": "Avaliação fisioterapêutica completa, com relatório por escrito",
+  "tituloOg": "Avaliação fisioterapêutica para idosos, com relatório por escrito",
   "descricao": "Força, marcha, equilíbrio e risco de queda medidos com testes padronizados e entregues num relatório por escrito. Zona Oeste de São Paulo.",
-  "ogImagem": "/og/avaliacao.png",
+  "ogImagem": "/og/avaliacao.jpg",
   "mensagem": "avaliacao",
-  "waTexto": "Agendar avaliação pelo WhatsApp",
-  "trenaLegenda": "<strong>Três metros.</strong> É a distância do teste TUG: levantar da cadeira, caminhar, virar, voltar e sentar. O tempo que isso leva diz muito sobre equilíbrio e mobilidade."
+  "waTexto": "Agendar pelo WhatsApp",
+  "fechamentoTitulo": "Quer saber como está a mobilidade de quem você cuida?",
+  "fechamentoTexto": "Chame no WhatsApp para combinar dia, horário e local da avaliação."
 } -->
 {{> cabeca}}
 <main id="conteudo">
 
-  <section class="heroi">
+  <section class="heroi heroi-com-folha bambuzal" aria-labelledby="titulo-pagina">
     <div class="conteiner heroi-grade">
-      <div class="heroi-texto">
-        <h1>Avaliação fisioterapêutica completa, com relatório por escrito</h1>
-        <p class="lead">Para famílias que querem entender como estão a força, a marcha e o equilíbrio de quem cuidam. São testes padronizados, com números, organizados num relatório que você pode guardar e mostrar ao médico.</p>
-        <p class="preco-linha">Avaliação com relatório: <strong>{{precoAvaliacao}}</strong></p>
-        <div class="heroi-acao"><a class="botao" href="{{waLink}}">{{waTexto}}</a></div>
+      <div class="heroi-painel vidro">
+        <h1 id="titulo-pagina">Avaliação fisioterapêutica para idosos, com relatório por escrito</h1>
+        <p class="lead">Para famílias que querem entender como estão a força, a marcha e o equilíbrio de quem cuidam. São testes padronizados, com números, num relatório que você pode guardar e mostrar ao médico.</p>
+        <div class="heroi-acao">
+          <a class="botao" href="{{waLink}}">{{waTexto}}</a>
+          <p class="preco-curto">Avaliação com relatório<strong>{{precoAvaliacao}}</strong></p>
+        </div>
         <p class="heroi-nota">Feita {{localAvaliacao}}.</p>
       </div>
-
-      <figure class="folha" aria-label="Modelo dos itens que aparecem no relatório">
-        <div class="folha-cabecalho">
-          <p class="folha-titulo">Relatório de avaliação funcional</p>
-          <p class="folha-sub">Modelo dos campos medidos</p>
-        </div>
-        <dl class="folha-linhas">
-          <div class="folha-linha"><dt>Força de preensão palmar</dt><dd><span></span>kg</dd></div>
-          <div class="folha-linha"><dt>Sentar e levantar 5 vezes</dt><dd><span></span>s</dd></div>
-          <div class="folha-linha"><dt>Velocidade de marcha</dt><dd><span></span>m/s</dd></div>
-          <div class="folha-linha"><dt>Timed Up and Go (TUG)</dt><dd><span></span>s</dd></div>
-          <div class="folha-linha"><dt>SARC-F</dt><dd><span></span>/ 10</dd></div>
-          <div class="folha-linha"><dt>Fragilidade (Fried)</dt><dd><span></span>/ 5</dd></div>
-        </dl>
-        <p class="folha-assinatura">{{nome}}, {{profissao}}</p>
-      </figure>
+      <div class="heroi-visual">
+        {{> relatorio}}
+      </div>
     </div>
   </section>
 
-  {{> trena}}
+  {{> sobre}}
 
-  <section class="secao" aria-labelledby="titulo-sinais">
+  <section class="secao secao-salvia" aria-labelledby="titulo-sinais">
     <div class="conteiner">
       <div class="secao-cabeca">
         <h2 id="titulo-sinais">Quando vale fazer uma avaliação</h2>
         <p class="secao-intro">Nenhum destes sinais é um diagnóstico. Mas todos merecem ser medidos, para a família saber de onde está partindo.</p>
       </div>
-      <ul class="lista-regua">
+      <ul class="lista-no">
         <li>Levantar da cadeira ou do sofá ficou mais difícil</li>
         <li>Caiu nos últimos meses, ou passou a ter medo de cair</li>
         <li>Está caminhando mais devagar ou se apoiando nos móveis</li>
@@ -65,7 +55,7 @@
         <h2 id="titulo-testes">O que é medido</h2>
         <p class="secao-intro">Testes usados na fisioterapia e na geriatria para acompanhar força e mobilidade. Cada um gera um número, e é esse número que permite comparar depois.</p>
       </div>
-      <dl class="definicoes">
+      <dl>
         <div class="definicao">
           <dt>Força de preensão palmar<small>Dinamometria</small></dt>
           <dd>Mede a força de aperto da mão com um aparelho chamado dinamômetro. É uma das medidas usadas para avaliar força muscular.</dd>
@@ -95,12 +85,12 @@
     </div>
   </section>
 
-  <section class="secao" aria-labelledby="titulo-recebe">
+  <section class="secao secao-salvia" aria-labelledby="titulo-recebe">
     <div class="conteiner">
       <div class="secao-cabeca">
         <h2 id="titulo-recebe">O que você recebe</h2>
       </div>
-      <ul class="recebe">
+      <ul class="lista-no">
         <li>Relatório por escrito, em PDF, com o resultado de cada teste explicado em linguagem simples</li>
         <li>Classificação do risco de queda e triagem de sarcopenia pelo consenso europeu EWGSOP2</li>
         <li>Pontos de atenção para a família e para quem cuida</li>
@@ -116,27 +106,15 @@
         <h2 id="titulo-passos">Como funciona</h2>
       </div>
       <ol class="passos">
-        <li>
-          <h3>Você chama no WhatsApp</h3>
-          <p>Combinamos dia, horário e local. Se houver exames ou relatórios médicos recentes, vale separar.</p>
-        </li>
-        <li>
-          <h3>Avaliação</h3>
-          <p>Os testes são feitos com calma, respeitando os limites do paciente. A família pode acompanhar.</p>
-        </li>
-        <li>
-          <h3>Relatório</h3>
-          <p>Você recebe o relatório por escrito, com os resultados e o que eles significam.</p>
-        </li>
-        <li>
-          <h3>Próximos passos</h3>
-          <p>Se fizer sentido, começamos o tratamento. A decisão é da família.</p>
-        </li>
+        <li><div><h3>Você chama no WhatsApp</h3><p>Combinamos dia, horário e local. Se houver exames ou relatórios médicos recentes, vale separar.</p></div></li>
+        <li><div><h3>Avaliação</h3><p>Os testes são feitos com calma, respeitando os limites do paciente. A família pode acompanhar.</p></div></li>
+        <li><div><h3>Relatório</h3><p>Você recebe o relatório por escrito, com os resultados e o que eles significam.</p></div></li>
+        <li><div><h3>Próximos passos</h3><p>Se fizer sentido, começamos o tratamento. A decisão é da família.</p></div></li>
       </ol>
     </div>
   </section>
 
-  <section class="secao valores" aria-labelledby="titulo-valores">
+  <section class="secao secao-salvia" aria-labelledby="titulo-valores">
     <div class="conteiner">
       <div class="secao-cabeca">
         <h2 id="titulo-valores">Valores</h2>
@@ -157,8 +135,6 @@
       <div class="valores-acao"><a class="botao" href="{{waLink}}">{{waTexto}}</a></div>
     </div>
   </section>
-
-  {{> sobre}}
 
   <section class="secao" aria-labelledby="titulo-perguntas">
     <div class="conteiner">
@@ -186,13 +162,7 @@
     </div>
   </section>
 
-  <section class="secao fechamento" aria-labelledby="titulo-fechamento">
-    <div class="conteiner fechamento-interno">
-      <h2 id="titulo-fechamento">Quer saber como está a mobilidade de quem você cuida?</h2>
-      <p>Chame no WhatsApp para combinar a avaliação.</p>
-      <a class="botao" href="{{waLink}}">{{waTexto}}</a>
-    </div>
-  </section>
+  {{> fechamento}}
 
 </main>
 {{> rodape}}

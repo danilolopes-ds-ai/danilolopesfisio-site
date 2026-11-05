@@ -7,12 +7,14 @@
 <title>{{titulo}}</title>
 <meta name="description" content="{{descricao}}">
 <link rel="canonical" href="{{urlPagina}}">{{{robots}}}
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#edf2e6">
 <meta name="color-scheme" content="light only">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/fontes/bricolage-800.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fontes/atkinson-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fontes/newsreader.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fontes/hanken-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/img/bambuzal-720.webp" as="image" type="image/webp" media="(max-width: 45.99rem)">
+<link rel="preload" href="/img/bambuzal-1600.webp" as="image" type="image/webp" media="(min-width: 46rem)">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="{{nome}}, {{profissao}}">
@@ -33,8 +35,8 @@
   <div class="conteiner topo-interno">
     <a class="marca" href="/" translate="no">
       <span class="marca-nome">{{nome}}</span>
-      <span class="marca-registro">{{profissao}}, {{crefito}}</span>
+      <span class="marca-registro">{{profissao}}, {{{crefitoHtml}}}</span>
     </a>
-    <a class="topo-wa" href="{{waLink}}" aria-label="Chamar no WhatsApp">WhatsApp</a>
+    <a class="topo-wa vidro" href="{{waLink}}" aria-label="Chamar no WhatsApp">WhatsApp</a>
   </div>
 </header>

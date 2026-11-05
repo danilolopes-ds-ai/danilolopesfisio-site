@@ -3,7 +3,7 @@
     <div class="rodape-grade">
       <div translate="no">
         <p class="rodape-nome">{{nome}}</p>
-        <p>{{profissao}}, {{crefito}}</p>
+        <p>{{profissao}}, {{{crefitoHtml}}}</p>
         <p>Atendimento particular na {{regiao}}</p>
       </div>
       <div>
@@ -23,16 +23,22 @@
     </div>
   </div>
 </footer>
-<div class="barra-wa"><a class="botao" href="{{waLink}}">{{waTexto}}</a></div>
+<div class="barra-wa vidro"><a class="botao" href="{{waLink}}">{{waTexto}}</a></div>
 <script>
 (function () {
   var barra = document.querySelector(".barra-wa");
   var alvo = document.querySelector(".heroi .botao") || document.querySelector(".heroi");
+  var fim = document.querySelector(".fechamento") || document.querySelector(".rodape");
   if (!barra) return;
   if (!alvo || !("IntersectionObserver" in window)) { barra.classList.add("visivel"); return; }
+  var passouTopo = false, chegouFim = false;
+  function atualizar() { barra.classList.toggle("visivel", passouTopo && !chegouFim); }
   new IntersectionObserver(function (e) {
-    barra.classList.toggle("visivel", !e[0].isIntersecting && e[0].boundingClientRect.top < 0);
+    passouTopo = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; atualizar();
   }).observe(alvo);
+  if (fim) new IntersectionObserver(function (e) {
+    chegouFim = e[0].isIntersecting || e[0].boundingClientRect.top < 0; atualizar();
+  }).observe(fim);
 })();
 </script>
 </body>

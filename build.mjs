@@ -42,10 +42,12 @@ const linkWa = (chave) => {
   return `https://wa.me/${dados.whatsapp}?text=${encodeURIComponent(dados.mensagens[chave])}`;
 };
 
+// Foto de retrato: entra em "Quem atende" só se src/img/danilo.webp existir (4:5, ex.: 640 x 800).
 const temFoto = fs.existsSync(path.join(src, "img", "danilo.webp"));
 const retrato = temFoto
-  ? `<img src="/img/danilo.webp" alt="${dados.nome}, ${dados.profissao.toLowerCase()}" width="288" height="288" loading="lazy" decoding="async">`
-  : "DL";
+  ? `<img class="retrato" src="/img/danilo.webp" alt="${dados.nome}, ${dados.profissao.toLowerCase()}" width="640" height="800" loading="lazy" decoding="async">`
+  : "";
+const classeSobre = temFoto ? " sobre-grade-foto" : "";
 
 const css = fs
   .readFileSync(path.join(src, "styles.css"), "utf8")
@@ -132,6 +134,8 @@ for (const arq of fs.readdirSync(path.join(src, "paginas")).filter((a) => a.ends
     localAvaliacaoFrase: `A avaliação é feita ${dados.localAvaliacao}, como for melhor para o paciente.`,
     dataExtenso,
     retrato,
+    classeSobre,
+    crefitoHtml: `<span class="sem-quebra">${escapar(dados.crefito)}</span>`,
     robots: meta.semIndice ? '\n<meta name="robots" content="noindex">' : "",
   };
 

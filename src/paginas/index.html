@@ -4,47 +4,45 @@
   "titulo": "Danilo Lopes, Fisioterapeuta | Fisioterapia para idosos em SP",
   "tituloOg": "Fisioterapia para idosos na Zona Oeste de São Paulo",
   "descricao": "Fisioterapia para idosos em casa e avaliação funcional completa com relatório por escrito. Zona Oeste de São Paulo.",
-  "ogImagem": "/og/inicio.png",
+  "ogImagem": "/og/inicio.jpg",
   "mensagem": "geral",
   "waTexto": "Chamar no WhatsApp",
-  "trenaLegenda": "<strong>Medir para cuidar.</strong> Força, marcha e equilíbrio avaliados com testes padronizados, como os três metros do TUG."
+  "fechamentoTitulo": "Quer conversar sobre o caso?",
+  "fechamentoTexto": "Conte um pouco sobre a situação pelo WhatsApp e vemos juntos por onde começar."
 } -->
 {{> cabeca}}
 <main id="conteudo">
 
-  <section class="heroi">
+  <section class="heroi bambuzal" aria-labelledby="titulo-pagina">
     <div class="conteiner">
-      <div class="heroi-texto">
-        <h1>Fisioterapia para idosos na Zona Oeste de São Paulo</h1>
-        <p class="lead">Avaliação completa com relatório por escrito e sessões na casa do paciente. Escolha por onde começar.</p>
+      <div class="heroi-grade heroi-grade-solo">
+        <div class="heroi-painel vidro">
+          <h1 id="titulo-pagina">Fisioterapia para idosos na Zona Oeste de São Paulo</h1>
+          <p class="lead">Avaliação completa com relatório por escrito e sessões na casa do paciente. Escolha por onde começar.</p>
+          <ul class="caminhos">
+            <li>
+              <a class="caminho" href="/avaliacao/">
+                <h2>Avaliação completa com relatório</h2>
+                <p>Testes de força, marcha, equilíbrio e risco de queda, organizados num relatório por escrito para a família.</p>
+                <span class="caminho-preco">{{precoAvaliacao}}</span>
+              </a>
+            </li>
+            <li>
+              <a class="caminho" href="/home-care/">
+                <h2>Fisioterapia em casa</h2>
+                <p>Sessões na casa do paciente, com treino no ambiente onde ele vive e orientação para quem cuida.</p>
+                <span class="caminho-preco">{{precoSessao}} por sessão</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  {{> trena}}
-
-  <section class="secao" aria-label="Serviços">
-    <div class="conteiner">
-      <ul class="inicio-caminhos">
-        <li>
-          <a class="caminho" href="/avaliacao/">
-            <h2>Avaliação completa com relatório</h2>
-            <p>Testes de força, marcha, equilíbrio e risco de queda, organizados num relatório por escrito para a família.</p>
-            <span class="caminho-preco">{{precoAvaliacao}}</span>
-          </a>
-        </li>
-        <li>
-          <a class="caminho" href="/home-care/">
-            <h2>Fisioterapia em casa</h2>
-            <p>Sessões na casa do paciente, com treino no ambiente onde ele vive e orientação para quem cuida.</p>
-            <span class="caminho-preco">{{precoSessao}} por sessão</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </section>
-
   {{> sobre}}
+
+  {{> fechamento}}
 
 </main>
 {{> rodape}}
