@@ -45,7 +45,6 @@ No GitHub, a cada envio, o mesmo build roda e confere se a pasta `public/` envia
 - `src/plataforma/` `_headers` (segurança e cache) e `_redirects` (endereços alternativos), copiados para `public/`
 - `src/img/danilo.webp` se existir, entra em "Quem atende" (retrato 4:5, 640 x 800 px)
 - `ferramentas/gerar-imagens.py` gera as imagens de compartilhamento em `src/og/` e o ícone do celular
-- `ferramentas/gerar-bambuzal.py` gera o fundo de bambu desfocado
 
 ## Fontes
 

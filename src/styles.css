@@ -32,8 +32,8 @@
   --cor-bambu-escuro: #2f5229;
   --cor-bambu-texto: #3a5f31;
 
-  --vidro-fundo: rgba(255, 255, 255, 0.74);
-  --vidro-borda: rgba(255, 255, 255, 0.72);
+  --vidro-fundo: rgba(255, 255, 255, 0.84);
+  --vidro-linha: rgba(30, 40, 20, 0.08);
   --vidro-desfoque: blur(20px) saturate(1.2);
 
   --fonte-titulo: "Newsreader", Georgia, "Times New Roman", serif;
@@ -103,7 +103,8 @@ p { text-wrap: pretty; }
 a { color: var(--cor-bambu-texto); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--cor-marrom); outline-offset: 3px; border-radius: 4px; }
-main, section[id] { scroll-margin-top: var(--e-4); }
+main, section[id] { scroll-margin-top: 5.5rem; }
+html { scroll-padding-top: 5.5rem; }
 
 .sem-quebra { white-space: nowrap; }
 .conteiner { width: 100%; max-width: var(--largura); margin-inline: auto; padding-inline: var(--margem); }
@@ -120,35 +121,21 @@ main, section[id] { scroll-margin-top: var(--e-4); }
 }
 .pular:focus { top: var(--e-4); }
 
-/* Vidro */
+/* Vidro: só no que desliza por cima do conteúdo (cabeçalho e barra do WhatsApp) */
 .vidro {
-  --cor-texto-suave: #4a4942;
   background: var(--vidro-fundo);
   -webkit-backdrop-filter: var(--vidro-desfoque);
   backdrop-filter: var(--vidro-desfoque);
-  border: 1px solid var(--vidro-borda);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), var(--sombra-1);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .vidro { background: rgba(255, 255, 255, 0.92); }
+  .vidro { background: rgba(255, 255, 255, 0.96); }
 }
 @media (prefers-reduced-transparency: reduce) {
   .vidro { background: var(--cor-fundo); -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
 
-/* Bambuzal: fundo do topo e do fechamento */
-.bambuzal {
-  background-color: #edf2e6;
-  background-image: url("/img/bambuzal-720.webp");
-  background-size: cover;
-  background-position: center top;
-}
-@media (min-width: 46rem) {
-  .bambuzal { background-image: url("/img/bambuzal-1600.webp"); background-position: 30% top; }
-}
-
-/* Cabeçalho, por cima do bambuzal */
-.topo { position: absolute; inset: 0 0 auto 0; z-index: 10; }
+/* Cabeçalho fixo de vidro */
+.topo { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--vidro-linha); }
 .topo-interno { display: flex; align-items: center; justify-content: space-between; gap: var(--e-4); padding-block: var(--e-4); }
 .marca { text-decoration: none; color: var(--cor-texto); line-height: 1.2; }
 .marca-nome { display: block; font-family: var(--fonte-titulo); font-weight: 520; font-size: 1.375rem; color: var(--cor-marrom); }
@@ -164,8 +151,9 @@ main, section[id] { scroll-margin-top: var(--e-4); }
   font-size: var(--t-pequeno);
   color: var(--cor-bambu-texto);
   text-decoration: none;
+  border: 1.5px solid currentColor;
 }
-.topo-wa:hover { background: rgba(255, 255, 255, 0.85); }
+.topo-wa:hover { background: var(--cor-bambu); border-color: var(--cor-bambu); color: #ffffff; }
 
 /* Botões */
 .botao {
@@ -188,9 +176,8 @@ main, section[id] { scroll-margin-top: var(--e-4); }
 .botao:hover { background: var(--cor-bambu-escuro); }
 
 /* Topo da página */
-.heroi { position: relative; padding-top: 6.5rem; padding-bottom: var(--e-7); }
+.heroi { padding-block: var(--e-7) var(--e-8); }
 .heroi-grade { display: grid; gap: var(--e-6); align-items: start; }
-.heroi-painel { border-radius: var(--r-3); padding: var(--e-6) var(--e-5); }
 .heroi-painel > * + * { margin-top: var(--e-5); }
 .lead { font-size: var(--t-lead); line-height: 1.5; color: var(--cor-texto-suave); max-width: var(--medida); }
 .heroi-acao { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-4) var(--e-5); }
@@ -204,7 +191,7 @@ main, section[id] { scroll-margin-top: var(--e-4); }
   font-variant-numeric: tabular-nums;
 }
 .heroi-nota { font-size: var(--t-meta); color: var(--cor-texto-suave); }
-.heroi-visual { display: flex; justify-content: center; }
+.heroi-visual { display: flex; justify-content: center; background: var(--cor-salvia); border-radius: var(--r-3); padding: var(--e-6) var(--e-4); }
 
 /* Folha (relatório e sessão) */
 .folha {
@@ -336,8 +323,8 @@ main, section[id] { scroll-margin-top: var(--e-4); }
 .pergunta p { padding-bottom: var(--e-5); max-width: var(--medida); color: var(--cor-texto-suave); }
 
 /* Fechamento */
-.fechamento { padding-block: var(--e-8); }
-.fechamento-painel { border-radius: var(--r-3); padding: var(--e-6) var(--e-5); max-width: 40rem; }
+.fechamento { padding-block: var(--secao); border-top: 1px solid var(--cor-linha); }
+.fechamento-painel { max-width: 40rem; }
 .fechamento-painel > * + * { margin-top: var(--e-4); }
 .fechamento-painel p { color: var(--cor-texto-suave); }
 
@@ -377,6 +364,8 @@ main, section[id] { scroll-margin-top: var(--e-4); }
   z-index: 15;
   padding: var(--e-2);
   border-radius: var(--r-pilula);
+  border: 1px solid var(--vidro-linha);
+  box-shadow: var(--sombra-1);
   transition: transform 200ms ease, opacity 200ms ease;
 }
 .js .barra-wa { transform: translateY(140%); opacity: 0; }
@@ -389,15 +378,14 @@ main, section[id] { scroll-margin-top: var(--e-4); }
 
 @media (min-width: 46rem) {
   :root { --secao: var(--e-9); }
-  .heroi { padding-top: 7.5rem; padding-bottom: var(--e-8); }
-  .heroi-painel { padding: var(--e-7); }
+  .heroi { padding-block: var(--e-8) var(--e-9); }
+  .heroi-visual { padding: var(--e-7) var(--e-6); }
   .lista-no { grid-template-columns: 1fr 1fr; }
   .definicao { grid-template-columns: 16rem 1fr; }
   .passos { grid-template-columns: 1fr 1fr; gap: var(--e-6) var(--e-7); }
   .motivos { grid-template-columns: repeat(3, 1fr); }
   .rodape-grade { grid-template-columns: 1.4fr 1fr 1fr; }
   .caminhos { grid-template-columns: 1fr 1fr; }
-  .fechamento-painel { padding: var(--e-7); }
   .barra-wa { display: none; }
   .rodape { padding-bottom: var(--e-7); }
 }
@@ -420,6 +408,5 @@ main, section[id] { scroll-margin-top: var(--e-4); }
 
 @media print {
   .topo-wa, .barra-wa, .botao { display: none; }
-  .bambuzal { background: none; }
   .topo { position: static; }
 }
