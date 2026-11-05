@@ -6,13 +6,13 @@ Páginas de Danilo Lopes, Fisioterapeuta (CREFITO/3 198613-F):
 - `/avaliacao/` avaliação fisioterapêutica completa com relatório
 - `/home-care/` fisioterapia para idosos em casa
 
-Site estático, sem framework: HTML, CSS embutido na página e fontes próprias. Hospedado na Cloudflare Pages.
+Site estático, sem framework: HTML, CSS embutido na página e fontes próprias. Hospedado na Cloudflare como Worker só com arquivos estáticos (`wrangler.jsonc`).
 
-## Configuração na Cloudflare Pages
+## Configuração na Cloudflare
 
-- Framework preset: None
-- Build command: `node build.mjs`
-- Build output directory: `public`
+- Comando de build: `node build.mjs`
+- Comando de deploy: `npx wrangler deploy`
+- A pasta publicada e a página de erro 404 estão definidas em `wrangler.jsonc`
 
 O build gera as páginas e confere tudo antes de publicar (veja abaixo). Se alguma conferência falhar, a Cloudflare não publica a versão quebrada e o site no ar continua o anterior.
 
@@ -41,7 +41,7 @@ No GitHub, a cada envio, o mesmo build roda e confere se a pasta `public/` envia
 - `src/paginas/` uma página por arquivo; o bloco `<!--meta ... -->` no topo define título, descrição e mensagem do WhatsApp
 - `src/partes/` cabeçalho, trena, "Quem atende" e rodapé, compartilhados
 - `src/styles.css` todo o visual
-- `src/plataforma/` `_headers` (segurança e cache) e `_redirects` (endereços alternativos)
+- `src/plataforma/` `_headers` (segurança e cache) e `_redirects` (endereços alternativos), copiados para `public/`
 - `src/img/danilo.webp` se existir, entra no lugar das iniciais em "Quem atende" (quadrada, 576 px)
 - `ferramentas/gerar-imagens.py` gera as imagens de compartilhamento em `src/og/`
 

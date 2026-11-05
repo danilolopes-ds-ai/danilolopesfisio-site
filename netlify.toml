@@ -1,6 +1,0 @@
-# Usado só se o site for publicado no Netlify.
-# Cabeçalhos e redirecionamentos ficam em src/plataforma (_headers e _redirects),
-# que funcionam tanto no Netlify quanto na Cloudflare Pages.
-[build]
-  command = "node build.mjs"
-  publish = "public"

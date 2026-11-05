@@ -1,4 +1,4 @@
-# Cabeçalhos aceitos pela Cloudflare Pages e pelo Netlify
+# Cabeçalhos de segurança e cache (Cloudflare)
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
